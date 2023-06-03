@@ -22,7 +22,7 @@ RUN echo "Package: libxml2*" > /etc/apt/preferences.d/libxml2 && \
 ### Install dependencies
 RUN yum install http://mirror.centos.org/centos/7/os/x86_64/Packages/libical-3.0.3-2.el7.x86_64.rpm -y \
     && yum install http://yum.freepbxdistro.org/pbx/10.13.66/x86_64/RPMS/digium/libresample/0.1.3/libresample-0.1.3-11_centos6.x86_64.rpm -y \
-    && yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm -y
+    && yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm -y \
     yum update && \
    ## apt-get -o Dpkg::Options::="--force-confold" upgrade -y && \
     \
