@@ -1,5 +1,5 @@
-FROM tiredofit/debian:buster
-LABEL maintainer="Dave Conroy (dave at tiredofit dot ca)"
+FROM c7base
+LABEL maintainer="ichi"
 
 ### Set defaults
 ENV ASTERISK_VERSION=17.9.4 \
@@ -94,7 +94,7 @@ RUN echo "Package: libxml2*" > /etc/apt/preferences.d/libxml2 && \
                         zlib1g-dev' && \
     \
 ### Install runtime dependencies
-    apt-get install --no-install-recommends -y \
+    yum install --no-install-recommends -y \
                     $ASTERISK_BUILD_DEPS \
                     apache2 \
                     composer \
