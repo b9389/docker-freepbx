@@ -20,17 +20,11 @@ RUN echo "Package: libxml2*" > /etc/apt/preferences.d/libxml2 && \
     APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=TRUE && \
     \
 ### Install dependencies
-    set -x && \
-    curl -sSLk https://packages.sury.org/php/apt.gpg | apt-key add - && \
-    curl -sSL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add - && \
-    echo "deb https://deb.nodesource.com/node_10.x $(cat /etc/os-release |grep "VERSION=" | awk 'NR>1{print $1}' RS='(' FS=')') main" > /etc/apt/sources.list.d/nodejs.list && \
-    echo "deb https://packages.sury.org/php/ buster main" > /etc/apt/sources.list.d/deb.sury.org.list && \
-    curl -sSLk https://www.mongodb.org/static/pgp/server-${MONGODB_VERSION}.asc | apt-key add - && \
-    echo "deb http://repo.mongodb.org/apt/debian buster/mongodb-org/${MONGODB_VERSION} main" > /etc/apt/sources.list.d/mongodb-org.list && \
-    echo "deb http://ftp.us.debian.org/debian/ buster-backports main" > /etc/apt/sources.list.d/backports.list && \
-    echo "deb-src http://ftp.us.debian.org/debian/ buster-backports main" >> /etc/apt/sources.list.d/backports.list && \
-    apt-get update && \
-    apt-get -o Dpkg::Options::="--force-confold" upgrade -y && \
+RUN yum install http://mirror.centos.org/centos/7/os/x86_64/Packages/libical-3.0.3-2.el7.x86_64.rpm -y \
+    && yum install http://yum.freepbxdistro.org/pbx/10.13.66/x86_64/RPMS/digium/libresample/0.1.3/libresample-0.1.3-11_centos6.x86_64.rpm -y \
+    && yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm -y
+    yum update && \
+   ## apt-get -o Dpkg::Options::="--force-confold" upgrade -y && \
     \
 ### Install development dependencies
     ASTERISK_BUILD_DEPS='\
